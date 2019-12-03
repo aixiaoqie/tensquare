@@ -5,7 +5,7 @@
     <artifactId>tensquare-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>tensquare_recruit</artifactId>
+  <artifactId>tensquare-recruit</artifactId>
   <dependencies>
  		<dependency>
 			<groupId>org.springframework.boot</groupId>
