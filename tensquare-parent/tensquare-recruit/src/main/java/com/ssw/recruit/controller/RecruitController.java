@@ -30,6 +30,25 @@ public class RecruitController {
     @Autowired
     private RecruitService recruitService;
 
+    /**
+     * 获取推荐职位
+     * @return
+     */
+    @RequestMapping(value = "/search/recommend",method = RequestMethod.GET)
+    public ResultModel recommend(){
+        return recruitService.recommend("2");
+    }
+
+    /**
+     * 获取最新职位
+     * @return
+     */
+    @RequestMapping(value = "/search/newlist",method = RequestMethod.GET)
+    public ResultModel newlist(){
+        return recruitService.newlist("0");
+    }
+
+
 
     /**
      * 查询全部数据

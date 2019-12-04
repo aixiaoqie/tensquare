@@ -12,6 +12,8 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
+import com.ssw.entity.ResultModel;
+import com.ssw.entity.StatusCode;
 import com.ssw.util.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -184,4 +186,15 @@ public class RecruitService {
 
     }
 
+    public ResultModel recommend(String s) {
+        List<Recruit> list = recruitDao.getTop6ByStateOrderByCreatetimeDesc(s);
+        ResultModel resultModel = new ResultModel(true, StatusCode.OK, "查询成功", list);
+        return resultModel;
+    }
+
+    public ResultModel newlist(String s) {
+        List<Recruit> list = recruitDao.getTop6ByStateNotOrderByCreatetimeDesc(s);
+        ResultModel resultModel = new ResultModel(true, StatusCode.OK, "查询成功", list);
+        return resultModel;
+    }
 }
