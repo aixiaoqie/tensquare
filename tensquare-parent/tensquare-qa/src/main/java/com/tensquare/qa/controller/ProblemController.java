@@ -29,7 +29,12 @@ public class ProblemController {
 
 	@Autowired
 	private ProblemService problemService;
-	
+
+	@RequestMapping(value = "/newlist/{label}/{page}/{size}",method = RequestMethod.GET)
+	public ResultModel newlist(@PathVariable("label") String labelId ,@PathVariable("page")int page,@PathVariable("size")int size){
+		return problemService.newlist(labelId,page,size);
+	}
+
 	
 	/**
 	 * 查询全部数据

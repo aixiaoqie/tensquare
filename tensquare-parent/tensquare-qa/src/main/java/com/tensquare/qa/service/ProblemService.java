@@ -12,10 +12,13 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
+import com.ssw.entity.ResultModel;
+import com.ssw.entity.StatusCode;
 import com.ssw.util.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -154,4 +157,9 @@ public class ProblemService {
 
 	}
 
+    public ResultModel newlist(String labelId, int page, int size) {
+		Pageable pageable = PageRequest.of(page-1,size);
+		Page<Problem> pageList = problemDao.newList(labelId, pageable);
+		return new ResultModel(true, StatusCode.OK,"查询成功",pageList);
+	}
 }
