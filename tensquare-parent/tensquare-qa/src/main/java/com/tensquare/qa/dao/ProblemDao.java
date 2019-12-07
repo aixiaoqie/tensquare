@@ -19,10 +19,10 @@ public interface ProblemDao extends JpaRepository<Problem,String>,JpaSpecificati
 
     @Query(value = "SELECT * FROM tb_problem,tb_pl WHERE id = problemid AND labelid = ? ORDER BY createtime DESC",nativeQuery = true)
     public Page<Problem> newList(String lableId, Pageable pageable);
-//
-//    @Query(value = "",nativeQuery = true)
-//    public Page<Problem> hotlist(String lableId, Pageable pageable);
-//
-//    @Query(value = "",nativeQuery = true)
-//    public Page<Problem> waitlist(String lableId, Pageable pageable);
+
+    @Query(value = "SELECT * FROM tb_problem,tb_pl WHERE id = problemid AND labelid = ? ORDER BY reply DESC",nativeQuery = true)
+    public Page<Problem> hotlist(String lableId, Pageable pageable);
+
+    @Query(value = "SELECT * FROM tb_problem,tb_pl WHERE id = problemid AND labelid = ? ANd reply = 0 ORDER BY createtime DESC",nativeQuery = true)
+    public Page<Problem> waitlist(String lableId, Pageable pageable);
 }

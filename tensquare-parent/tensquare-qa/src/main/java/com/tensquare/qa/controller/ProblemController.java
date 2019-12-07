@@ -35,7 +35,18 @@ public class ProblemController {
 		return problemService.newlist(labelId,page,size);
 	}
 
-	
+	@RequestMapping(value = "/hotlist/{label}/{page}/{size}",method = RequestMethod.GET)
+	public ResultModel hotlist(@PathVariable("label") String labelId ,@PathVariable("page")int page,@PathVariable("size")int size){
+		return problemService.hotlist(labelId,page,size);
+	}
+
+	@RequestMapping(value = "/waitlist/{label}/{page}/{size}",method = RequestMethod.GET)
+	public ResultModel waitlist(@PathVariable("label") String labelId ,@PathVariable("page")int page,@PathVariable("size")int size){
+		return problemService.waitlist(labelId,page,size);
+	}
+
+
+
 	/**
 	 * 查询全部数据
 	 * @return

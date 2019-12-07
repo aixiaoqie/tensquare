@@ -162,4 +162,16 @@ public class ProblemService {
 		Page<Problem> pageList = problemDao.newList(labelId, pageable);
 		return new ResultModel(true, StatusCode.OK,"查询成功",pageList);
 	}
+
+	public ResultModel hotlist(String labelId, int page, int size) {
+		Pageable pageable = PageRequest.of(page-1,size);
+		Page<Problem> pageList = problemDao.hotlist(labelId, pageable);
+		return new ResultModel(true, StatusCode.OK,"查询成功",pageList);
+	}
+
+	public ResultModel waitlist(String labelId, int page, int size) {
+		Pageable pageable = PageRequest.of(page-1,size);
+		Page<Problem> pageList = problemDao.waitlist(labelId, pageable);
+		return new ResultModel(true, StatusCode.OK,"查询成功",pageList);
+	}
 }
