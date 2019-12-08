@@ -31,6 +31,28 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    /**
+     * 增加文章点赞数
+     *
+     * @param articleId 文章id
+     * @return
+     */
+    @RequestMapping(value = "/thumbup/{articleId}", method = RequestMethod.PUT)
+    public ResultModel addThumbup(@PathVariable("articleId") String articleId) {
+        articleService.addThumbup(articleId);
+        return new ResultModel(true, 200, "点赞成功");
+    }
+
+    /**
+     * 审核文章
+     *
+     * @param articleId 文章id
+     */
+    @RequestMapping(value = "/examine/{articleId}", method = RequestMethod.PUT)
+    public ResultModel examine(@PathVariable("articleId") String articleId) {
+        articleService.examine(articleId);
+        return new ResultModel(true, 200, "审核成功");
+    }
 
     /**
      * 查询全部数据
