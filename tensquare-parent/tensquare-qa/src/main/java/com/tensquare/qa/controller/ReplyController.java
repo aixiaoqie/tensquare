@@ -76,7 +76,7 @@ public class ReplyController {
 	
 	/**
 	 * 增加
-	 * @param reply
+	 * @param reply 回答对象
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public ResultModel add(@RequestBody Reply reply  ){
