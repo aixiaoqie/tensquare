@@ -5,6 +5,12 @@ import org.springframework.data.annotation.Id;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author ssw
+ * @desciption 吐槽实体类
+ * @date 2019/12/16
+ * @time 23:24
+ */
 public class Spit implements Serializable {
     @Id
     private String _id;
