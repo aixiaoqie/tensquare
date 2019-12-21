@@ -9,6 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * @author ssw
+ * @desciption 吐槽服务层
+ * @date 2019/12/21
+ * @time 23:09
+ */
 @Service
 @Transactional
 public class SpitService {
@@ -30,6 +36,7 @@ public class SpitService {
         spit.set_id(idWorker.nextId() + "");
         spitDao.save(spit);
     }
+
     public void update(Spit spit) {
         spitDao.save(spit);
     }
