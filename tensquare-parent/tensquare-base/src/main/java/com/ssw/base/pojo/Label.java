@@ -5,9 +5,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+/**
+ * @author ssw
+ * @desciption 标签实体类
+ * @date 2019/12/22
+ * @time 1:24
+ */
 @Entity
 @Table(name = "tb_label")
-public class Label implements Serializable{
+public class Label implements Serializable {
     @Id
     private String id;//
     private String labelname;//标签名称
