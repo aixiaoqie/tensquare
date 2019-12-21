@@ -13,6 +13,7 @@
         <module>tensquare-recruit</module>
         <module>tensquare-qa</module>
         <module>tensquare-article</module>
+        <module>tensquare-spit</module>
     </modules>
     <packaging>pom</packaging>
 
