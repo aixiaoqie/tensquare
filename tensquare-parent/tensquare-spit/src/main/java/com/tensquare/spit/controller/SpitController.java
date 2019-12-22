@@ -56,4 +56,9 @@ public class SpitController {
         return new ResultModel(true, StatusCode.OK, "查询成功", new PageResult<Spit>(pageData.getTotalElements(), pageData.getContent()));
     }
 
+    @RequestMapping(value = "/thumbup/{spitId}", method = RequestMethod.PUT)
+    public ResultModel thumbup(@PathVariable("spitId") String spitId) {
+        spitService.thumbup(spitId);
+        return new ResultModel(true, StatusCode.OK, "点赞成功");
+    }
 }

@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,5 +64,34 @@ public class SpitService {
     public Page<Spit> findByParentId(String parentId, int page, int size) {
         Pageable pageable = PageRequest.of(page - 1, size);
         return spitDao.findByParentid(parentId, pageable);
+    }
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+    /**
+     * @param spitId 吐槽id
+     * @desciption 吐槽点赞
+     * @author ssw
+     * @date 2019/12/22
+     * @time 23:35
+     */
+    public void thumbup(String spitId) {
+        //效率低 进行两次数据库交互
+//        Spit spit = spitDao.findById(spitId).get();
+//        spit.setThumbup((spit.getThumbup() == null ? 0 : spit.getThumbup()) + 1);
+//        spitDao.save(spit);
+        /*
+         *方式二 封装查询条件 进行一次交互
+         *使用原生的mongo命令
+         * db.spit.update({"_id":"1"},{$inc:{thumbup:NumberInt(1)}})
+         */
+        //封装的是查询条件
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(spitId));
+        //封装修改的数据内容
+        Update update = new Update();
+        update.inc("thumbup", 1);
+        mongoTemplate.updateFirst(query, update, "spit");
     }
 }
