@@ -2,7 +2,7 @@ server:
   port: 9006
 spring:
   application:
-    name: tensqaure-split
+    name: tensqaure-spit
   data:
     mongodb:
       host: 59.110.142.82
