@@ -6,3 +6,4 @@
 吐槽 tensquare-spit
 招聘 tensquare-recruit
 问答 tensquare-qa
+文章 tensquare-article
