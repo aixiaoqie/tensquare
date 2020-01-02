@@ -1,5 +1,5 @@
 微服务项目
-包括模块
+包括以下模块
 父级 tensquare-parent
 通用 tensquare-conmmon
 标签 tensquare-base
