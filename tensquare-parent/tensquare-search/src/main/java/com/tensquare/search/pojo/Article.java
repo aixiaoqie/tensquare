@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import java.io.Serializable;
 
 /**
- * 文章搜索实体类
+ * 文章搜索实体类 , elasticsearch搜索 文档
  */
 @Document(indexName = "tensquare_article", type = "article")
 public class Article implements Serializable {
