@@ -14,6 +14,7 @@
         <module>tensquare-qa</module>
         <module>tensquare-article</module>
         <module>tensquare-spit</module>
+        <module>tensquare-search</module>
     </modules>
     <packaging>pom</packaging>
 
