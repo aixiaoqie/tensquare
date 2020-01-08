@@ -7,7 +7,13 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import java.io.Serializable;
 
 /**
- * 文章搜索实体类 , elasticsearch搜索 文档
+ * 文章搜索实体类 , elasticsearch搜索
+ *
+ * 对比
+ * Elasticsearch    关系型数据库Mysql
+ * 索引(index)        数据库(databases)
+ * 类型(type)         表(table)
+ * 文档(document)     行(row)
  */
 @Document(indexName = "tensquare_article", type = "article")
 public class Article implements Serializable {
