@@ -1,9 +1,7 @@
 package com.ssw.user.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -11,13 +9,19 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
+import javax.servlet.http.HttpServletRequest;
 
 import com.ssw.util.IdWorker;
+import com.ssw.util.JwtUtil;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -39,6 +43,20 @@ public class UserService {
 	@Autowired
 	private IdWorker idWorker;
 
+	@Autowired
+	private RedisTemplate redisTemplate;
+
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
+
+//	@Autowired
+//	private BCryptPasswordEncoder encoder;
+
+	@Autowired
+	private HttpServletRequest request;
+
+//	@Autowired
+//	private JwtUtil jwtUtil;
 	/**
 	 * 查询全部列表
 	 * @return
@@ -87,6 +105,14 @@ public class UserService {
 	 */
 	public void add(User user) {
 		user.setId( idWorker.nextId()+"" );
+		//密码加密
+//		user.setPassword(encoder.encode(user.getPassword()));
+		user.setFollowcount(0);//关注数
+		user.setFanscount(0);//粉丝数
+		user.setOnline(0L);//在线时长
+		user.setRegdate(new Date());//注册日期
+		user.setUpdatedate(new Date());//更新日期
+		user.setLastdate(new Date());//最后登陆日期
 		userDao.save(user);
 	}
 
@@ -160,6 +186,21 @@ public class UserService {
 			}
 		};
 
+	}
+
+	public void sendSms(String mobile) {
+		System.out.println(mobile);
+		//生成六位数字随机数
+		String checkcode = RandomStringUtils.randomNumeric(6);
+		//向缓存中放一份
+		redisTemplate.opsForValue().set("checkcode_"+mobile, checkcode, 6, TimeUnit.HOURS);
+		//给用户发一份
+		Map<String, String> map = new HashMap<>();
+		map.put("mobile", mobile);
+		map.put("checkcode", checkcode);
+		//rabbitTemplate.convertAndSend("sms", map);
+		//在控制台显示一份【方便测试】
+		System.out.println("验证码为："+checkcode);
 	}
 
 }

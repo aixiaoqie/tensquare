@@ -5,8 +5,10 @@ import java.util.Map;
 import com.ssw.entity.PageResult;
 import com.ssw.entity.ResultModel;
 import com.ssw.entity.StatusCode;
+import com.ssw.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +31,38 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private RedisTemplate redisTemplate;
+//	@Autowired
+//	private JwtUtil jwtUtil;
+
+	/**
+	 * 发送短信验证码
+	 */
+	@RequestMapping(value = "/sendsms/{mobile}", method = RequestMethod.POST)
+	public ResultModel sendSms(@PathVariable String mobile){
+		userService.sendSms(mobile);
+		return new ResultModel(true, StatusCode.OK, "发送成功");
+	}
+
+	/**
+	 * 注册
+	 * @return
+	 */
+	@RequestMapping(value = "/register/{code}", method = RequestMethod.POST)
+	public ResultModel regist(@PathVariable String code, @RequestBody User user){
+		//得到缓存中的验证码
+		String checkcodeRedis = (String) redisTemplate.opsForValue().get("checkcode_" + user.getMobile());
+		if(checkcodeRedis.isEmpty()){
+			return new ResultModel(false, StatusCode.ERROR, "请先获取手机验证码");
+		}
+		if(!checkcodeRedis.equals(code)){
+			return new ResultModel(false, StatusCode.ERROR, "请输入正确的验证码");
+		}
+		userService.add(user);
+		return new ResultModel(true, StatusCode.OK, "注册成功");
+	}
 	
 	
 	/**
