@@ -5,7 +5,7 @@ spring:
     name: tensquare-user #指定服务名
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://59.110.142.82:3306/tensquare_user?characterEncoding=utf-8
+    url: jdbc:mysql://192.168.120.200:3306/tensquare_user?characterEncoding=utf-8
     username: root
     password: 19971104
   jpa:
@@ -15,3 +15,7 @@ spring:
     host: 192.168.120.200
   rabbitmq:
     host: 192.168.120.200
+jwt:
+  config:
+    key: itcast
+    ttl: 3600000

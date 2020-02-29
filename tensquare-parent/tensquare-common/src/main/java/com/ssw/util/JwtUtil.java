@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * Created by Administrator on 2018/4/11.
  */
-//@ConfigurationProperties("jwt.config")
+@ConfigurationProperties("jwt.config")
 public class JwtUtil {
 
     private String key ;

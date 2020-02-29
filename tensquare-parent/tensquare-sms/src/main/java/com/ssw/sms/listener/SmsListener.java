@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 @Component
-@RabbitListener
+@RabbitListener(queues = "sms")
 public class SmsListener {
 
     @Autowired
