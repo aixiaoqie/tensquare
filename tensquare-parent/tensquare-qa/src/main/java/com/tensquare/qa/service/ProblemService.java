@@ -11,6 +11,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
+import javax.servlet.http.HttpServletRequest;
 
 import com.ssw.entity.PageResult;
 import com.ssw.entity.ResultModel;
@@ -41,6 +42,9 @@ public class ProblemService {
 
     @Autowired
     private IdWorker idWorker;
+
+    @Autowired
+    private HttpServletRequest request;
 
     /**
      * 查询全部列表
@@ -95,6 +99,10 @@ public class ProblemService {
      */
     public void add(Problem problem) {
         problem.setId(idWorker.nextId() + "");
+        String token = (String) request.getAttribute("claims_user");
+        if (token==null || "".equals(token)){
+            throw new RuntimeException("权限不足！");
+        }
         problemDao.save(problem);
     }
 

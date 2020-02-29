@@ -1,4 +1,5 @@
 package com.tensquare.qa.controller;
+
 import java.util.Map;
 
 import com.ssw.entity.PageResult;
@@ -19,106 +20,112 @@ import com.tensquare.qa.service.ProblemService;
 
 /**
  * 控制器层
- * @author Administrator
  *
+ * @author Administrator
  */
 @RestController
 @CrossOrigin
 @RequestMapping("/problem")
 public class ProblemController {
 
-	@Autowired
-	private ProblemService problemService;
+    @Autowired
+    private ProblemService problemService;
 
-	@RequestMapping(value = "/newlist/{label}/{page}/{size}",method = RequestMethod.GET)
-	public ResultModel newlist(@PathVariable("label") String labelId ,@PathVariable("page")int page,@PathVariable("size")int size){
-		return problemService.newlist(labelId,page,size);
-	}
+    @RequestMapping(value = "/newlist/{label}/{page}/{size}", method = RequestMethod.GET)
+    public ResultModel newlist(@PathVariable("label") String labelId, @PathVariable("page") int page, @PathVariable("size") int size) {
+        return problemService.newlist(labelId, page, size);
+    }
 
-	@RequestMapping(value = "/hotlist/{label}/{page}/{size}",method = RequestMethod.GET)
-	public ResultModel hotlist(@PathVariable("label") String labelId ,@PathVariable("page")int page,@PathVariable("size")int size){
-		return problemService.hotlist(labelId,page,size);
-	}
+    @RequestMapping(value = "/hotlist/{label}/{page}/{size}", method = RequestMethod.GET)
+    public ResultModel hotlist(@PathVariable("label") String labelId, @PathVariable("page") int page, @PathVariable("size") int size) {
+        return problemService.hotlist(labelId, page, size);
+    }
 
-	@RequestMapping(value = "/waitlist/{label}/{page}/{size}",method = RequestMethod.GET)
-	public ResultModel waitlist(@PathVariable("label") String labelId ,@PathVariable("page")int page,@PathVariable("size")int size){
-		return problemService.waitlist(labelId,page,size);
-	}
-
-
-
-	/**
-	 * 查询全部数据
-	 * @return
-	 */
-	@RequestMapping(method= RequestMethod.GET)
-	public ResultModel findAll(){
-		return new ResultModel(true, StatusCode.OK,"查询成功",problemService.findAll());
-	}
-	
-	/**
-	 * 根据ID查询
-	 * @param id ID
-	 * @return
-	 */
-	@RequestMapping(value="/{id}",method= RequestMethod.GET)
-	public ResultModel findById(@PathVariable String id){
-		return new ResultModel(true,StatusCode.OK,"查询成功",problemService.findById(id));
-	}
+    @RequestMapping(value = "/waitlist/{label}/{page}/{size}", method = RequestMethod.GET)
+    public ResultModel waitlist(@PathVariable("label") String labelId, @PathVariable("page") int page, @PathVariable("size") int size) {
+        return problemService.waitlist(labelId, page, size);
+    }
 
 
-	/**
-	 * 分页+多条件查询
-	 * @param searchMap 查询条件封装
-	 * @param page 页码
-	 * @param size 页大小
-	 * @return 分页结果
-	 */
-	@RequestMapping(value="/search/{page}/{size}",method=RequestMethod.POST)
-	public ResultModel findSearch(@RequestBody Map searchMap , @PathVariable int page, @PathVariable int size){
-		Page<Problem> pageList = problemService.findSearch(searchMap, page, size);
-		return  new ResultModel(true,StatusCode.OK,"查询成功",  new PageResult<Problem>(pageList.getTotalElements(), pageList.getContent()) );
-	}
+    /**
+     * 查询全部数据
+     *
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET)
+    public ResultModel findAll() {
+        return new ResultModel(true, StatusCode.OK, "查询成功", problemService.findAll());
+    }
 
-	/**
+    /**
+     * 根据ID查询
+     *
+     * @param id ID
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResultModel findById(@PathVariable String id) {
+        return new ResultModel(true, StatusCode.OK, "查询成功", problemService.findById(id));
+    }
+
+
+    /**
+     * 分页+多条件查询
+     *
+     * @param searchMap 查询条件封装
+     * @param page      页码
+     * @param size      页大小
+     * @return 分页结果
+     */
+    @RequestMapping(value = "/search/{page}/{size}", method = RequestMethod.POST)
+    public ResultModel findSearch(@RequestBody Map searchMap, @PathVariable int page, @PathVariable int size) {
+        Page<Problem> pageList = problemService.findSearch(searchMap, page, size);
+        return new ResultModel(true, StatusCode.OK, "查询成功", new PageResult<Problem>(pageList.getTotalElements(), pageList.getContent()));
+    }
+
+    /**
      * 根据条件查询
+     *
      * @param searchMap
      * @return
      */
-    @RequestMapping(value="/search",method = RequestMethod.POST)
-    public ResultModel findSearch( @RequestBody Map searchMap){
-        return new ResultModel(true,StatusCode.OK,"查询成功",problemService.findSearch(searchMap));
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public ResultModel findSearch(@RequestBody Map searchMap) {
+        return new ResultModel(true, StatusCode.OK, "查询成功", problemService.findSearch(searchMap));
     }
-	
-	/**
-	 * 增加
-	 * @param problem
-	 */
-	@RequestMapping(method=RequestMethod.POST)
-	public ResultModel add(@RequestBody Problem problem  ){
-		problemService.add(problem);
-		return new ResultModel(true,StatusCode.OK,"增加成功");
-	}
-	
-	/**
-	 * 修改
-	 * @param problem
-	 */
-	@RequestMapping(value="/{id}",method= RequestMethod.PUT)
-	public ResultModel update(@RequestBody Problem problem, @PathVariable String id ){
-		problem.setId(id);
-		problemService.update(problem);		
-		return new ResultModel(true,StatusCode.OK,"修改成功");
-	}
-	
-	/**
-	 * 删除
-	 * @param id
-	 */
-	@RequestMapping(value="/{id}",method= RequestMethod.DELETE)
-	public ResultModel delete(@PathVariable String id ){
-		problemService.deleteById(id);
-		return new ResultModel(true,StatusCode.OK,"删除成功");
-	}
-	
+
+    /**
+     * 增加
+     *
+     * @param problem
+     */
+    @RequestMapping(method = RequestMethod.POST)
+    public ResultModel add(@RequestBody Problem problem) {
+        problemService.add(problem);
+        return new ResultModel(true, StatusCode.OK, "增加成功");
+    }
+
+    /**
+     * 修改
+     *
+     * @param problem
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResultModel update(@RequestBody Problem problem, @PathVariable String id) {
+        problem.setId(id);
+        problemService.update(problem);
+        return new ResultModel(true, StatusCode.OK, "修改成功");
+    }
+
+    /**
+     * 删除
+     *
+     * @param id
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResultModel delete(@PathVariable String id) {
+        problemService.deleteById(id);
+        return new ResultModel(true, StatusCode.OK, "删除成功");
+    }
+
 }
