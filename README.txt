@@ -8,6 +8,9 @@
 问答 tensquare-qa
 文章 tensquare-articleww
 搜索 tensquare-search
+用户 tensquare-user
+短信 tensquare-sms
+
 
 2020新的一年，新的起点，新的征程
 加班，打不到车，好难受 2020.1.9
