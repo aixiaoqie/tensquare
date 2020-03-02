@@ -5,6 +5,7 @@ import java.util.Map;
 import com.ssw.entity.PageResult;
 import com.ssw.entity.ResultModel;
 import com.ssw.entity.StatusCode;
+import com.tensquare.qa.client.BaseClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,6 +31,20 @@ public class ProblemController {
 
     @Autowired
     private ProblemService problemService;
+
+    @Autowired
+    private BaseClient baseClient;
+
+    /**
+     * 通过feign调用base模块查询接口
+     * @param labelId labelId
+     * @return
+     */
+    @RequestMapping(value = "/label/{labelId}", method = RequestMethod.GET)
+    public ResultModel findLableById(@PathVariable("labelId") String labelId){
+        return new ResultModel(true,StatusCode.OK,"feign调用base查询成功",baseClient.findById(labelId));
+    }
+
 
     @RequestMapping(value = "/newlist/{label}/{page}/{size}", method = RequestMethod.GET)
     public ResultModel newlist(@PathVariable("label") String labelId, @PathVariable("page") int page, @PathVariable("size") int size) {
