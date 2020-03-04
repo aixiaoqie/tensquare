@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssw.user.dao.UserDao;
 import com.ssw.user.pojo.User;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 服务层
@@ -228,5 +229,11 @@ public class UserService {
             return user;
         }
         return null;
+    }
+
+    @Transactional
+    public void updatefanscountandfollowcount(int x, String userid, String friendid) {
+        userDao.updatefanscount(x, friendid);
+        userDao.updatefollowcount(x, userid);
     }
 }
