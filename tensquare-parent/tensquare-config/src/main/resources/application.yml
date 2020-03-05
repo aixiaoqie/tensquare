@@ -9,13 +9,11 @@ spring:
         git:
           uri: https://github.com/aixiaoqie/tensquare.git
           search-paths: config
-#          username: aixiaoqie
-#          password: *19971104.ying
 
-#  rabbitmq:
-#    host: 192.168.217.136
-#management: #暴露触发消息总线的地址
-#  endpoints:
-#    web:
-#      exposure:
-#        include: bus-refresh
+  rabbitmq:
+    host: 192.168.120.200
+management: #暴露触发消息总线的地址
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
