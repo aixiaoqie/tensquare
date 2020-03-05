@@ -1,5 +1,5 @@
 server:
-  port: 12000
+  port: 13879
 spring:
   application:
     name: tensquare-config
