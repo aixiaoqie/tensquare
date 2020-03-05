@@ -1,5 +1,5 @@
 server:
-  port: 13879
+  port: 12000
 spring:
   application:
     name: tensquare-config
@@ -8,6 +8,7 @@ spring:
       server:
         git:
           uri: https://github.com/aixiaoqie/tensquare.git
+          search-paths: config
 #          username: aixiaoqie
 #          password: *19971104.ying
 
