@@ -22,4 +22,4 @@ zuul:
     tensquare-user:
       path: /user/**
       serviceId: tensquare-user
-  sensitive-headers: aaaaa
+  sensitive-headers:
