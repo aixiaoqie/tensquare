@@ -5,4 +5,4 @@ eureka:
     register-with-eureka: false #是否注册到eureka, 默认为true
     fetch-registry: false #是否获取注册信息，默认为true
     service-url:
-      default-zone: http://127.0.0.1:${server.port}/eureka/
+      defaultZone: http://127.0.0.1:${server.port}/eureka/
