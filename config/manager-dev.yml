@@ -1,0 +1,25 @@
+server: 
+  port: 9011
+spring: 
+  application:  
+    name: tensquare-manager #指定服务名
+
+jwt:
+  config:
+    key: itcast
+    ttl: 3600000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true #跨域访问
+zuul:
+  routes:
+    tensquare-base:
+      path: /base/**
+      serviceId: tensquare-base
+    tensquare-user:
+      path: /user/**
+      serviceId: tensquare-user
+  sensitive-headers: aaaaa
