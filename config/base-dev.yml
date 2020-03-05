@@ -17,3 +17,6 @@ eureka:
       defaultZone: http://127.0.0.1:6868/eureka/
   instance:
     prefer-ip-address: true #跨域访问
+# 自定义配置文件
+ip:
+  address: 192.168.0.122
