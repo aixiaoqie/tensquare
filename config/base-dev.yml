@@ -21,4 +21,4 @@ eureka:
     prefer-ip-address: true #跨域访问
 # 自定义配置文件
 ip:
-  address: 192.168.0.110
+  address: 192.168.0.111
