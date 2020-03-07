@@ -9,7 +9,6 @@ spring:
         git:
           uri: https://github.com/aixiaoqie/tensquare.git
           search-paths: config
-
   rabbitmq:
     host: 192.168.120.200
 management: #暴露触发消息总线的地址

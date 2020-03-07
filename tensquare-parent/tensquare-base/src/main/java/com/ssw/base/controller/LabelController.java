@@ -6,22 +6,28 @@ import com.ssw.entity.PageResult;
 import com.ssw.entity.ResultModel;
 import com.ssw.entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @CrossOrigin
 @RequestMapping("/label")
+@RefreshScope
 public class LabelController {
+
+    @Value("${ip.address}")
+    private String ipAddr;
 
     @Autowired
     private LabelService labelService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResultModel findAll() {
+        System.out.println("测试自定义配置 消息总线更新" + ipAddr);
         List<Label> labelList = labelService.findAll();
         return new ResultModel(true, StatusCode.OK, "查询成功", labelList);
     }
