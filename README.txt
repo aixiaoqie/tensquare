@@ -6,7 +6,7 @@
 吐槽 tensquare-spit
 招聘 tensquare-recruit
 问答 tensquare-qa
-文章 tensquare-articleww
+文章 tensquare-article
 搜索 tensquare-search
 用户 tensquare-user
 短信 tensquare-sms
